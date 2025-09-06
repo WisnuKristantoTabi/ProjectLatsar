@@ -1,7 +1,18 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('user', \App\Http\Controllers\UserController::class);
+
+Route::get('/home', [UserController::class, 'index']);
+
+Route::get('/login', [LoginController::class, 'index']);
+Route::post('/postlogin', [LoginController::class, 'postLogin']);
+Route::get('/dashboard', [DashboardController::class, 'index']);
