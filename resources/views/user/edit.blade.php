@@ -33,7 +33,7 @@
         </div>
         <!-- [ breadcrumb ] end -->
         <!-- [ Main Content ] start -->
-        <div class="row">
+        <div class="row justify-content-md-center">
             <!-- [ sample-page ] start -->
             <div class="col-md-12 col-xl-8">
                 @if ($errors->any())

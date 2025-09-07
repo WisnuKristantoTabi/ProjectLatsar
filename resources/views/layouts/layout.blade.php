@@ -75,7 +75,7 @@
                             aria-expanded="false">
                             <i class="ti ti-mail"></i>
                         </a>
-                        <div class="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown">
+                        <!-- <div class="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown">
                             <div class="dropdown-header d-flex align-items-center justify-content-between">
                                 <h5 class="m-0">Message</h5>
                                 <a href="#!" class="pc-head-link bg-transparent"><i class="ti ti-x text-danger"></i></a>
@@ -137,7 +137,7 @@
                             <div class="text-center py-2">
                                 <a href="#!" class="link-primary">View all</a>
                             </div>
-                        </div>
+                        </div> -->
                     </li>
                     <li class="dropdown pc-h-item header-user-profile">
                         <a
@@ -148,7 +148,7 @@
                             aria-haspopup="false"
                             data-bs-auto-close="outside"
                             aria-expanded="false">
-                            <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar">
+                            <!-- <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar"> -->
                             <span>Stebin Ben</span>
                         </a>
                         <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
@@ -249,7 +249,7 @@
     <!-- [ Main Content ] end -->
     <footer class="pc-footer">
         <div class="footer-wrapper container-fluid">
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-sm my-1">
                     <p class="m-0">Mantis &#9829; crafted by Team <a href="https://themeforest.net/user/codedthemes" target="_blank">Codedthemes</a> Distributed by <a href="https://themewagon.com/">ThemeWagon</a>.</p>
                 </div>
@@ -258,7 +258,7 @@
                         <li class="list-inline-item"><a href="../index.html">Home</a></li>
                     </ul>
                 </div>
-            </div>
+            </div> -->
         </div>
     </footer>
 

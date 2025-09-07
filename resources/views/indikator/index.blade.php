@@ -8,7 +8,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">Tabel User</h5>
+                            <h5 class="m-b-10">Tabel Indikator</h5>
                         </div>
                         <ul class="breadcrumb">
                             @php $segments = ''; @endphp
@@ -31,7 +31,7 @@
         <div class="row">
             <!-- [ sample-page ] start -->
             <div class="col-md-12">
-                <h5 class="mb-3"><a class="btn btn-primary" href="{{ route('user.create') }}" role="button">Tambah</a></h5>
+                <h5 class="mb-3"><a class="btn btn-primary" href="{{ route('indikator.create') }}" role="button">Tambah</a></h5>
                 <div class="card tbl-card">
                     <div class="card-body">
                         <div class="table-responsive">
@@ -39,30 +39,21 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama</th>
-                                        <th>Username</th>
-                                        <th>Bidang</th>
+                                        <th>Sasaran</th>
+                                        <th>Indikator Kineja</th>
+                                        <th>Pagu Anggaran</th>
                                         <th class="text-end">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($users as $user)
+                                    @foreach ($indikator as $data)
                                     <tr>
                                         <td class="text-muted"> {{ $loop->iteration }}</td>
-                                        <td>{{ $user['nama'] }}</td>
-                                        <td>{{ $user['username'] }}</td>
-                                        <td>{{ $user['bidang']['nama_bidang'] }}</td>
+                                        <td>{{ $data->sasaran }}</td>
+                                        <td>{{ $data->indikator_kinerja }}</td>
+                                        <td>Rp.{{ number_format( $data->pagu_anggaran, 0, ',', '.') }}</td>
                                         <td class="text-end">
-                                            <a href="{{route('user.show', $user['user_id'])}}">Lihat</a>
-                                            <a href="#" class="text-danger"
-                                                onclick="event.preventDefault(); if(confirm('Yakin hapus user ini?')) { document.getElementById('delete-user-{{ $user['user_id'] }}').submit(); }">
-                                                Hapus
-                                            </a>
-
-                                            <form id="delete-user-{{ $user['user_id'] }}" action="{{ route('user.destroy', $user['user_id']) }}" method="POST" style="display:none;">
-                                                @csrf
-                                                @method('DELETE')
-                                            </form>
+                                            <a href="{{ route('indikator.show', $data->indikator_id) }}">Lihat Detail</a>
                                         </td>
                                     </tr>
                                     @endforeach

@@ -50,7 +50,7 @@
                     <div class="card my-5">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-end mb-4">
-                                <h3 class="mb-0"><b>Login</b></h3>
+                                <h3 class="mb-0"><b>SIKAILI (Sistem Kinerja & Laporan Internal)</b></h3>
 
                             </div>
                             <div class="form-group mb-3">

@@ -8,7 +8,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">User</h5>
+                            <h5 class="m-b-10">Indikator</h5>
                         </div>
                         <ul class="breadcrumb">
                             @php $segments = ''; @endphp
@@ -28,9 +28,9 @@
         </div>
         <!-- [ breadcrumb ] end -->
         <!-- [ Main Content ] start -->
-        <div class="row justify-content-md-center">
+        <div class="row">
             <!-- [ sample-page ] start -->
-            <div class="col-md-12 col-xl-8">
+            <div class="col-md-12">
                 @if ($errors->any())
                 <div class="alert alert-danger" role="alert">
                     <ul>
@@ -40,42 +40,40 @@
                     </ul>
                 </div>
                 @endif
-                <h5 class="mb-3">Daftar Pengguna</h5>
+                <h5 class="mb-3">Daftar Indikator</h5>
                 <div class="card tbl-card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-end mb-4">
                             <h3 class="mb-0"><b>Daftar</b></h3>
                         </div>
-                        <form action="{{ route('user.store') }}" method="POST">
+                        <form action="{{ route('indikator.store') }}" method="POST">
                             @csrf
                             @method('POST')
                             <div class="form-group mb-3">
-                                <label class="form-label">Nama Lengkap</label>
-                                <input type="text" class="form-control" name="nama" placeholder="Nama Lengkap">
+                                <label class="form-label">Sasaran Kinerja</label>
+                                <textarea type="text" class="form-control" name="sasaran" placeholder="Sasaran Kinerja"></textarea>
                             </div>
                             <div class="form-group mb-3">
-                                <label class="form-label">Username</label>
-                                <input type="text" class="form-control" name="username" placeholder="Username">
+                                <label class="form-label">Indikator Kinerja</label>
+                                <textarea type="text" class="form-control" name="indikatorkinerja" placeholder="Indikator Kinerja"></textarea>
                             </div>
                             <div class="form-group mb-3">
-                                <label class="form-label">Password</label>
-                                <input name="password" type="password" class="form-control" placeholder="Password">
+                                <label class="form-label">Target</label>
+                                <input type="number" min=0 class="form-control" name="target" placeholder="Target Kinerja">
+                                <div class="form-text">
+                                    Angka dalam bentuk persen (%)
+                                </div>
                             </div>
                             <div class="form-group mb-3">
-                                <label class="form-label">Status</label>
-                                <select id="" name="role" class="form-select">
-                                    <option value="1">Admin</option>
-                                    <option value="2">Operator</option>
-                                    <option value="3">Pimpinan</option>
-                                </select>
+                                <label class="form-label">Pagu Anggaran</label>
+                                <input type="number" min=0 class="form-control" name="paguanggaran" placeholder="Pagu Anggaran">
                             </div>
                             <div class="form-group mb-3">
-                                <label class="form-label">Bidang</label>
-                                <select id="" name="bidang" class="form-select">
-                                    @foreach ($bidang as $data)
-                                    <option value="{{ $data->bidang_id }}">{{ $data->nama_bidang }}</option>
-                                    @endforeach
-                                </select>
+                                <label class="form-label">Koreksi Normalisasi</label>
+                                <input type="number" min=0 class="form-control" name="koreksinormalisasi" placeholder="Koreksi Normalisasi">
+                                <div class="form-text">
+                                    Angka dalam bentuk persen (%)
+                                </div>
                             </div>
                             <div class="d-grid mt-3">
                                 <button type="submit" class="btn btn-primary">Daftar</button>
