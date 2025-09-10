@@ -44,7 +44,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h6 class="mb-2 f-w-400 text-muted">Target</h6>
-                        <h4 class="mb-3"><span class="badge bg-light-primary border border-primary"> {{$indikatorModel->target}}%</span>
+                        <h4 class="mb-3"><span class="badge bg-light-primary border border-primary"> {{$indikatorModel->target}} {{$indikatorModel->target_jenis}}</span>
                     </div>
                 </div>
             </div>
@@ -70,10 +70,10 @@
                 </div>
             </div>
             <div class="row justify-content-md-center">
-                <div class="col-md-12 col-xl-8 ">
+                <div class="col-md-12">
                     <div class="card tbl-card">
                         <div class="card-header">
-                            <h5 class="mb-3"><a class="btn btn-primary" href="{{ route('indikator.create') }}" role="button">Tambah</a></h5>
+                            <h5 class="mb-3"><a class="btn btn-primary" href="{{ url('/indikator/'.$indikatorModel->indikator_id.'/detail/create') }}" role="button">Tambah</a></h5>
                             <h5>Daftar Kegiatan</h5>
                         </div>
                         <div class="card-body">
@@ -81,20 +81,20 @@
                                 <table class="table table-hover table-borderless mb-0">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
+                                            <th>Triwulan</th>
                                             <th>Nama Kegiatan</th>
-                                            <th>Keterangan</th>
-                                            <th>Realisasi</th>
+                                            <th>Nama Kegiatan Total</th>
+                                            <th>Nama Kegiatan Terlaksana</th>
                                             <th class="text-end">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($indikatordetail as $data)
                                         <tr>
-                                            <td class="text-muted"> {{ $loop->iteration }}</td>
+                                            <td class="text-muted"> {{ $data->triwulan }}</td>
                                             <td>{{ $data->kegiatan_name }}</td>
-                                            <td>{{ $data->keterangan }}</td>
-                                            <td>{{ $data->realisasi }}</td>
+                                            <td>{{ $data->usulan_kegiatan_name }}</td>
+                                            <td>{{ $data->realisasi_kegiatan_name }}</td>
                                             <td class="text-end">
                                                 <a href="">Lihat Detail</a>
                                             </td>

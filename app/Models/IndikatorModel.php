@@ -35,6 +35,7 @@ class IndikatorModel extends Model
         'sasaran',
         'indikator_kinerja',
         'target',
+        'target_jenis',
         'pagu_anggaran',
         'koreksi_normalisasi',
 

@@ -16,7 +16,7 @@ class IndikatorDetailModel extends Model
 
     protected $table = 'indikator_detail';
 
-    protected $primaryKey = 'user_id';
+    protected $primaryKey = 'indikator_detail_id';
     public $incrementing = false;
     protected $keyType = 'string';
 
@@ -31,18 +31,23 @@ class IndikatorDetailModel extends Model
     protected static function booted()
     {
         static::creating(function ($model) {
-            if (empty($model->user_id)) {
-                $model->user_id = (string) Str::ulid();
+            if (empty($model->indikator_detail_id)) {
+                $model->indikator_detail_id = (string) Str::ulid();
             }
         });
     }
 
     protected $fillable = [
-        'nama',
-        'username',
-        'role',
+        'indikator_id',
+        'kegiatan_name',
+        'keterangan',
+        'realisasi_anggaran',
         'bidang_id',
-        'password',
+        'triwulan',
+        'usulan_kegiatan_name',
+        'target_per',
+        'target_per_jenis',
+        'realisasi_kegiatan_name'
 
     ];
 

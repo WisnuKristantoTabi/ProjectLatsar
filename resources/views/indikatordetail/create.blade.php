@@ -40,40 +40,66 @@
                     </ul>
                 </div>
                 @endif
-                <h5 class="mb-3">Daftar Indikator</h5>
+                <h5 class="mb-3">Daftar Kegiatan</h5>
                 <div class="card tbl-card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-end mb-4">
-                            <h3 class="mb-0"><b>Daftar</b></h3>
+                    <div class="card-header">
+                        <div class="mb-4">
+                            <h5><b>{{ $indikator->sasaran}}</b></h5>
+                            <p> {{ $indikator->indikator_kinerja }}</p>
                         </div>
-                        <form action="{{ route('indikator.store') }}" method="POST">
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ url('/indikator/$indikator->indikator_id/detail') }}" method="POST">
                             @csrf
                             @method('POST')
+                            <input type="hidden" name="id" value="{{$indikator->indikator_id}}">
                             <div class="form-group mb-3">
-                                <label class="form-label">Sasaran Kinerja</label>
-                                <textarea type="text" class="form-control" name="sasaran" placeholder="Sasaran Kinerja"></textarea>
+                                <label class="form-label">Nama Kegiatan</label>
+                                <textarea type="text" class="form-control" name="kegiatanname" placeholder="Masukkan Nama Kegiatan"></textarea>
                             </div>
                             <div class="form-group mb-3">
-                                <label class="form-label">Indikator Kinerja</label>
-                                <textarea type="text" class="form-control" name="indikatorkinerja" placeholder="Indikator Kinerja"></textarea>
+                                <label class="form-label">Nama Kegiatan(Jumlah Total)</label>
+                                <textarea type="text" class="form-control" name="usulankegiatanname" placeholder="Masukan Nama Kegiatan"></textarea>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label">Nama Kegiatan(Jumlah Yang Telaksana)</label>
+                                <textarea type="text" class="form-control" name="usulankegiatanrealisasi" placeholder="Masukkan Nama Kegiatan"></textarea>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label">Keterangan</label>
+                                <textarea type="text" class="form-control" name="keterangan" placeholder="Keterangan"></textarea>
                             </div>
                             <div class="form-group mb-3">
                                 <label class="form-label">Target</label>
-                                <input type="number" min=0 class="form-control" name="target" placeholder="Target Kinerja">
-                                <div class="form-text">
-                                    Angka dalam bentuk persen (%)
-                                </div>
+                                <input type="number" min=0 class="form-control" name="targetper" placeholder="Target Kinerja">
                             </div>
                             <div class="form-group mb-3">
-                                <label class="form-label">Pagu Anggaran</label>
-                                <input type="number" min=0 class="form-control" name="paguanggaran" placeholder="Pagu Anggaran">
+                                <label class="form-label">Jenis Target</label>
+                                <select id="" name="targetperjenis" class="form-select">
+                                    <option value="persen(%)">Persen(%)</option>
+                                    <option value="dokumen">Dokumen</option>
+                                </select>
                             </div>
                             <div class="form-group mb-3">
-                                <label class="form-label">Koreksi Normalisasi</label>
-                                <input type="number" min=0 class="form-control" name="koreksinormalisasi" placeholder="Koreksi Normalisasi">
-                                <div class="form-text">
-                                    Angka dalam bentuk persen (%)
-                                </div>
+                                <label class="form-label">Triwulan</label>
+                                <select id="" name="triwulan" class="form-select">
+                                    <option value="1">I</option>
+                                    <option value="2">II</option>
+                                    <option value="3">III</option>
+                                    <option value="4">IV</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label">Realisasi Anggaran</label>
+                                <input type="number" min=0 class="form-control" name="realisasianggaran" placeholder="Realisasi Anggaran">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label">Bidang</label>
+                                <select id="" name="bidang" class="form-select">
+                                    @foreach ($bidang as $data)
+                                    <option value="{{ $data->bidang_id }}">{{ $data->nama_bidang }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="d-grid mt-3">
                                 <button type="submit" class="btn btn-primary">Daftar</button>

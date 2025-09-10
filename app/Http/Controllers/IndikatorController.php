@@ -36,6 +36,7 @@ class IndikatorController extends Controller
             'sasaran'               => 'required',
             'indikatorkinerja'      => 'required',
             'target'                => 'required',
+            'target_jenis'          => 'required',
             'paguanggaran'          => 'required',
             'koreksinormalisasi'    => 'required',
         ]);
@@ -44,6 +45,7 @@ class IndikatorController extends Controller
             'sasaran'                   => $request->sasaran,
             'indikator_kinerja'         => $request->indikatorkinerja,
             'target'                    => $request->target,
+            'target_jenis'              => $request->target_jenis,
             'pagu_anggaran'             => $request->paguanggaran,
             'koreksi_normalisasi'       => $request->koreksinormalisasi,
         ]);

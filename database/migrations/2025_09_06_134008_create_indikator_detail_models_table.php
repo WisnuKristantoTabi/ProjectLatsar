@@ -16,6 +16,7 @@ return new class extends Migration
             $table->ulid('indikator_id');
             $table->text('kegiatan_name');
             $table->text('keterangan');
+            $table->integer('triwulan');
             $table->integer('realisasi_anggaran');
             $table->ulid('bidang_id');
             $table->timestamp('created_at');

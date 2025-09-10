@@ -60,9 +60,13 @@
                             <div class="form-group mb-3">
                                 <label class="form-label">Target</label>
                                 <input type="number" min=0 class="form-control" name="target" placeholder="Target Kinerja">
-                                <div class="form-text">
-                                    Angka dalam bentuk persen (%)
-                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label">Jenis Target</label>
+                                <select id="" name="target_jenis" class="form-select">
+                                    <option value="persen(%)">Persen(%)</option>
+                                    <option value="dokumen">Dokumen</option>
+                                </select>
                             </div>
                             <div class="form-group mb-3">
                                 <label class="form-label">Pagu Anggaran</label>

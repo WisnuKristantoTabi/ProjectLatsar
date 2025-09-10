@@ -18,7 +18,7 @@ class Bidang extends Seeder
         $users = [
             [
                 'bidang_id'  =>  (string) Str::ulid(),
-                'nama_bidang' => "Bagian Umum-Pusdatin",
+                'nama_bidang' => "Badan Pembinaan Hukum Nasional - P3H",
                 'deskripsi'      => '',
                 'created_at'    => Carbon::now(),
                 'updated_at'    => Carbon::now(),
