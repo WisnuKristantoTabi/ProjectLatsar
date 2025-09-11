@@ -63,10 +63,18 @@ class IndikatorDetailController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(IndikatorDetailModel $indikatorDetailModel)
+    // public function show(IndikatorDetailModel $indikatorDetailModel)
+    // {
+    //     // $bidang = BidangModel::all();
+    //     return view('indikatordetail.show', ['indikatorDetailModel' => $indikatorDetailModel]);
+    //     // echo "test";
+    // }
+
+    public function show($id)
     {
+        $indikatorDetailModel = IndikatorDetailModel::findOrFail($id);
         // $bidang = BidangModel::all();
-        return view('indikatordetail.show', compact('indikatorDetailModel'));
+        return view('indikatordetail.show', ['indikatorDetailModel' => $indikatorDetailModel]);
         // echo "test";
     }
 

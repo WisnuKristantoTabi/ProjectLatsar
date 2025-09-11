@@ -96,7 +96,7 @@
                                             <td>{{ $data->usulan_kegiatan_name }}</td>
                                             <td>{{ $data->realisasi_kegiatan_name }}</td>
                                             <td class="text-end">
-                                                <a href="">Lihat Detail</a>
+                                                <a href="{{ url('/indikator/'.$data->indikator_detail_id.'/detail')}}">Lihat Detail</a>
                                             </td>
                                         </tr>
                                         @endforeach

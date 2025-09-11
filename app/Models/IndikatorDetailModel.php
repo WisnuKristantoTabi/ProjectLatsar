@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\BidangModel;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\PenilaianModel;
+use App\Models\IndikatorModel;
 use Illuminate\Support\Str;
 
 class IndikatorDetailModel extends Model
@@ -59,4 +62,14 @@ class IndikatorDetailModel extends Model
     protected $hidden = [
         'password',
     ];
+
+    public function penilaian(): HasMany
+    {
+        return $this->hasMany(PenilaianModel::class, 'indikator_detail_id');
+    }
+
+    public function indikator(): BelongsTo
+    {
+        return $this->belongsTo(IndikatorModel::class, 'indikator_id');
+    }
 }
