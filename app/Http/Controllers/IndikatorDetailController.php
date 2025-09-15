@@ -36,6 +36,7 @@ class IndikatorDetailController extends Controller
         $request->validate([
             'kegiatanname'              => 'required',
             'usulankegiatanname'        => 'required',
+            'usulankegiatanscore'       => 'required',
             'usulankegiatanrealisasi'   => 'required',
             'targetper'                 => 'required',
             'targetperjenis'            => 'required',
@@ -49,6 +50,7 @@ class IndikatorDetailController extends Controller
             'indikator_id'              => $request->id,
             'kegiatan_name'             => $request->kegiatanname,
             'usulan_kegiatan_name'      => $request->usulankegiatanname,
+            'usulan_kegiatan_score'     => $request->usulankegiatanscore,
             'realisasi_kegiatan_name'   => $request->usulankegiatanrealisasi,
             'target_per'                => $request->targetper,
             'target_per_jenis'          => $request->targetperjenis,

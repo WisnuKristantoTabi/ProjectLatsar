@@ -12,15 +12,24 @@ class PenilaianController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($id)
+    public function index()
     {
-        $penilaian = IndikatorModel::where('')->get();
-
+        // $penilaian = IndikatorModel::with(['bidang', 'indikator'])
+        //     ->withSum('penilaian', 'realisasi_kegiatan_score')
+        //     ->where('bidang_id', session('bidang'))
+        //     ->get();
+        $penilaian = IndikatorDetailModel::with(['bidang', 'indikator'])
+            ->withSum('penilaian', 'realisasi_kegiatan_score')
+            ->where('bidang_id', session('bidang'))
+            ->get();
         return view("penilaian.index", compact('penilaian'));
-
         // foreach ($penilaian as $detail) {
         //     echo $detail->usulan_kegiatan_name . ' = ' . $detail->penilaian_sum_realisasi_kegiatan_score . '<br>';
         // }
+        // dd([
+        //     'session_bidang' => session('bidang'),
+        //     'all_bidang_id' => IndikatorDetailModel::pluck('bidang_id')->unique()
+        // ]);
     }
 
     public function detail($id)

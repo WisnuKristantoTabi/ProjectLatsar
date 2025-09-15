@@ -30,7 +30,6 @@
         <!-- [ Main Content ] start -->
         <div class="row">
             <!-- [ sample-page ] start -->
-
         </div>
     </div>
 </div>

@@ -36,7 +36,6 @@ class PenilaianModel extends Model
         'indikator_detail_id',
         'month',
         'year',
-        'usulan_kegiatan_score',
         'realisasi_kegiatan_score',
         'keterangan',
         'suppporting_data',

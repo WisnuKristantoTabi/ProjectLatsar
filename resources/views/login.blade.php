@@ -46,13 +46,25 @@
                 <div class="auth-header">
                     <a href="#"><img src="{{ asset('images/logo-kemenkum.svg') }}" alt="img"></a>
                 </div>
-                <form action="{{ url('/postlogin') }}" method="POST">
-                    <div class="card my-5">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-end mb-4">
-                                <h3 class="mb-0"><b>SIKAILI (Sistem Kinerja & Laporan Internal)</b></h3>
 
-                            </div>
+
+                <div class="card my-5">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-end mb-4">
+                            <h3 class="mb-0"><b>SIKAILI (Sistem Kinerja & Laporan Internal)</b></h3>
+                        </div>
+                        @if ($errors->any())
+                        <div class="alert alert-danger" role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        {{ session('username') }}
+                        <form action="{{ url('/postlogin') }}" method="POST">
+                            @csrf
                             <div class="form-group mb-3">
                                 <label class="form-label">Username</label>
                                 <input type="text" name="username" class="form-control" placeholder="Username">
@@ -64,46 +76,14 @@
                             <div class="d-grid mt-4">
                                 <button type="submit" class="btn btn-primary">Login</button>
                             </div>
-                            <!-- <div class="saprator mt-3">
-                            <span>Login with</span>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="d-grid">
-                                    <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                                        <img src="{{ asset('images/authentication/google.svg') }}" alt="img"> <span class="d-none d-sm-inline-block"> Google</span>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="d-grid">
-                                    <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                                        <img src="{{ asset('images/authentication/twitter.svg') }}" alt="img"> <span class="d-none d-sm-inline-block"> Twitter</span>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="d-grid">
-                                    <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                                        <img src="{{ asset('images/authentication/facebook.svg') }}" alt="img"> <span class="d-none d-sm-inline-block"> Facebook</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div> -->
-                        </div>
+                        </form>
                     </div>
-                </form>
+                </div>
+
                 <div class="auth-footer row">
                     <!-- <div class=""> -->
                     <div class="col my-1">
-                        <p class="m-0">Copyright © <a href="#">Codedthemes</a></p>
-                    </div>
-                    <div class="col-auto my-1">
-                        <ul class="list-inline footer-link mb-0">
-                            <li class="list-inline-item"><a href="#">Home</a></li>
-                            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-                            <li class="list-inline-item"><a href="#">Contact us</a></li>
-                        </ul>
+                        <p class="m-0">Kanwil Kemenkum Sulteng</p>
                     </div>
                     <!-- </div> -->
                 </div>

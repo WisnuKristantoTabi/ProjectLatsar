@@ -24,12 +24,36 @@ class LoginController extends Controller
         ]);
 
         $credentials = $request->only('username', 'password');
+
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('home')
+            $request->session()->regenerate();
+
+            $user = Auth::user();
+
+            session([
+                'username' => $user->username,
+                'role'     => $user->role,
+                'bidang'   => $user->bidang_id,
+            ]);
+            // print_r(session()->all());
+
+            return redirect()->intended('dashboard')
                 ->withSuccess('You have Successfully loggedin');
         }
 
         // return redirect("login")->withError('Oppes! You have entered invalid credentials');
-        print_r($credentials);
+        return back()->withErrors([
+            'password' => 'Password yang Anda masukkan salah atau akun tidak ditemukan.',
+        ])->withInput();
+        // print_r($credentials);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();                         // hapus auth user
+        $request->session()->invalidate();      // hapus semua session
+        $request->session()->regenerateToken(); // regenerate CSRF token
+
+        return redirect('/login')->withSuccess('Anda berhasil logout');
     }
 }

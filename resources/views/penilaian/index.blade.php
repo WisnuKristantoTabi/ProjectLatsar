@@ -39,7 +39,9 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Sasaran</th>
-                                        <th>Indikator Kinerja</th>
+                                        <th>Triwulan</th>
+                                        <th>
+                                        <th>
                                         <th class="text-end">Aksi</th>
                                     </tr>
                                 </thead>
@@ -47,8 +49,9 @@
                                     @foreach ($penilaian as $data)
                                     <tr>
                                         <td class="text-muted"> {{ $loop->iteration }}</td>
-                                        <td>{{ $data->sasaran }}</td>
+                                        <td>{{ $data->indikator->sasaran}}</td>
                                         <td>{{ $data->indikator_kinerja }}</td>
+                                        <td>{{ $data->penilaian_sum_realisasi_kegiatan_score  }}</td>
                                         <td class="text-end">
                                             <a href="{{ url('/penilaian/'.$data->indikator_id.'/detail/index') }}">Lihat</a>
                                         </td>

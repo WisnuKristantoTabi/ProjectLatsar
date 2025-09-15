@@ -48,6 +48,7 @@ class IndikatorDetailModel extends Model
         'bidang_id',
         'triwulan',
         'usulan_kegiatan_name',
+        'usulan_kegiatan_score',
         'target_per',
         'target_per_jenis',
         'realisasi_kegiatan_name'
@@ -66,6 +67,11 @@ class IndikatorDetailModel extends Model
     public function penilaian(): HasMany
     {
         return $this->hasMany(PenilaianModel::class, 'indikator_detail_id');
+    }
+
+    public function bidang()
+    {
+        return $this->belongsTo(BidangModel::class, 'bidang_id');
     }
 
     public function indikator(): BelongsTo

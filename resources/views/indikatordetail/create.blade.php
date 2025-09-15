@@ -62,6 +62,10 @@
                                 <textarea type="text" class="form-control" name="usulankegiatanname" placeholder="Masukan Nama Kegiatan"></textarea>
                             </div>
                             <div class="form-group mb-3">
+                                <label class="form-label">Jumlah Total Kegiatan</label>
+                                <input type="number" min=0 class="form-control" name="usulankegiatanscore" placeholder="Masukan Total Kegiatan"></input>
+                            </div>
+                            <div class="form-group mb-3">
                                 <label class="form-label">Nama Kegiatan(Jumlah Yang Telaksana)</label>
                                 <textarea type="text" class="form-control" name="usulankegiatanrealisasi" placeholder="Masukkan Nama Kegiatan"></textarea>
                             </div>
