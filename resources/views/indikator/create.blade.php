@@ -73,6 +73,14 @@
                                 <input type="number" min=0 class="form-control" name="paguanggaran" placeholder="Pagu Anggaran">
                             </div>
                             <div class="form-group mb-3">
+                                <label class="form-label">Bidang</label>
+                                <select id="" name="bidang" class="form-select">
+                                    @foreach ($bidang as $data)
+                                    <option value="{{ $data->bidang_id }}">{{ $data->nama_bidang }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group mb-3">
                                 <label class="form-label">Koreksi Normalisasi</label>
                                 <input type="number" min=0 class="form-control" name="koreksinormalisasi" placeholder="Koreksi Normalisasi">
                                 <div class="form-text">

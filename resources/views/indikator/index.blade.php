@@ -31,7 +31,10 @@
         <div class="row">
             <!-- [ sample-page ] start -->
             <div class="col-md-12">
-                <h5 class="mb-3"><a class="btn btn-primary" href="{{ route('indikator.create') }}" role="button">Tambah</a></h5>
+                <h5 class="mb-3"><a class="btn btn-primary" href="{{ route('indikator.create') }}" role="button">
+                        <span class="pc-micon"><i class="ti ti-plus"></i></span>
+                        Tambah
+                    </a></h5>
                 <div class="card tbl-card">
                     <div class="card-body">
                         <div class="table-responsive">
@@ -52,8 +55,17 @@
                                         <td>{{ $data->sasaran }}</td>
                                         <td>{{ $data->indikator_kinerja }}</td>
                                         <td>Rp.{{ number_format( $data->pagu_anggaran, 0, ',', '.') }}</td>
-                                        <td class="text-end">
-                                            <a href="{{ route('indikator.show', $data->indikator_id) }}">Lihat Detail</a>
+                                        <td class="text-end btn-group">
+                                            <a href="{{ route('indikator.show', $data->indikator_id) }}" class="btn btn-primary btn-sm"><span class="pc-micon"><i class="ti ti-eye"></i></span></a>
+                                            <a href="{{ route('indikator.edit', $data->indikator_id) }}" class="btn btn-warning btn-sm"><span class="pc-micon"><i class="ti ti-edit"></i></span></a>
+                                            <a href="#" class="btn btn-danger btn-sm"
+                                                onclick="event.preventDefault(); if(confirm('Apakah yakin hapus data ini?')) { document.getElementById('delete-data-{{ $data->indikator_id }}').submit(); }">
+                                                <span class="pc-micon"><i class="ti ti-trash"></i></span>
+                                            </a>
+                                            <form id="delete-data-{{ $data->indikator_id }}" action="{{ route('indikator.destroy', $data->indikator_id) }}" method="POST" style="display:none;">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach

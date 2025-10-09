@@ -18,9 +18,8 @@ class PenilaianController extends Controller
         //     ->withSum('penilaian', 'realisasi_kegiatan_score')
         //     ->where('bidang_id', session('bidang'))
         //     ->get();
-        $penilaian = IndikatorDetailModel::with(['bidang', 'indikator'])
-            ->withSum('penilaian', 'realisasi_kegiatan_score')
-            ->where('bidang_id', session('bidang'))
+        $penilaian = IndikatorModel::where('bidang_id', session('bidang'))
+            // ->withSum('penilaian', 'realisasi_kegiatan_score')
             ->get();
         return view("penilaian.index", compact('penilaian'));
         // foreach ($penilaian as $detail) {
@@ -45,6 +44,16 @@ class PenilaianController extends Controller
         // }
     }
 
+    public function data($id)
+    {
+        $penilaian = PenilaianModel::with("indikatorDetail")
+            ->where("indikator_detail_id", $id)
+            ->get();
+
+        // print_r($penilaian);
+        return view("penilaian.data", compact('penilaian'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -63,7 +72,6 @@ class PenilaianController extends Controller
         $request->validate([
             'indikatordetailid'         => 'required',
             'indikatorid'               => 'required',
-            'usulankegiatanscore'       => 'required',
             'realisasikegiatanscore'    => 'required',
             'month'                     => 'required',
             'year'                      => 'required',
@@ -74,7 +82,6 @@ class PenilaianController extends Controller
         PenilaianModel::create([
             'indikator_id'              => decrypt($request->indikatorid),
             'indikator_detail_id'       => $request->indikatordetailid,
-            'usulan_kegiatan_score'     => $request->usulankegiatanscore,
             'realisasi_kegiatan_score'  => $request->realisasikegiatanscore,
             'month'                     => $request->month,
             'year'                      => $request->year,
@@ -82,38 +89,63 @@ class PenilaianController extends Controller
             'suppporting_data'          => $request->suppportingdata,
 
         ]);
-        return redirect()->route('indikator.index')->with('success', 'Kegiatan berhasil ditambahkan!');
+        return redirect()->route('penilaian.data', $request->indikatordetailid)->with('success', 'Kegiatan berhasil ditambahkan!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(PenilaianModel $penilaianModel)
+    public function show($id)
     {
-        //
+        // print($id);
+        $penilaian = PenilaianModel::with(['indikator', 'indikatorDetail'])->findOrFail($id);
+        return view("penilaian.show", compact('penilaian'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PenilaianModel $penilaianModel)
+    public function edit($id)
     {
-        //
+        $penilaian = PenilaianModel::with(['indikator', 'indikatorDetail'])->findOrFail($id);
+        return view("penilaian.edit", compact('penilaian'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PenilaianModel $penilaianModel)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'realisasikegiatanscore'    => 'required',
+            'month'                     => 'required',
+            'year'                      => 'required',
+            'keterangan'                => 'required',
+            'suppportingdata'           => 'required',
+        ]);
+
+        $penilaianModel =  PenilaianModel::findOrFail($request->idpenilaian);
+
+        $penilaianModel->update([
+            'realisasi_kegiatan_score'  => $request->realisasikegiatanscore,
+            'month'                     => $request->month,
+            'year'                      => $request->year,
+            'keterangan'                => $request->keterangan,
+            'suppporting_data'          => $request->suppportingdata,
+
+        ]);
+        // dd($request);
+        // print($request->idpenilaian);
+        return redirect()->route('penilaian.data', $request->id)->with('success', 'Kegiatan berhasil diubah!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PenilaianModel $penilaianModel)
+    public function destroy($id)
     {
-        //
+        $penilaianModel = PenilaianModel::findOrFail($id);
+        $penilaianModel->delete();
+        return redirect()->route('penilaian.data', $penilaianModel->indikator_detail_id)->with('success', 'Data berhasil di hapus!');
     }
 }

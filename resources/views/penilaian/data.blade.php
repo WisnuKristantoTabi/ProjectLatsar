@@ -8,7 +8,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">Tabel Penilaian</h5>
+                            <h5 class="m-b-10">Tabel Data Penilaian</h5>
                         </div>
                         <ul class="breadcrumb">
                             @php $segments = ''; @endphp
@@ -38,8 +38,9 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Sasaran</th>
-                                        <th>Indikator Kinerja</th>
+                                        <th>Nama Kegiatan</th>
+                                        <th>Bulan</th>
+                                        <th>Jumlah Kegiatan</th>
                                         <th class="text-end">Aksi</th>
                                     </tr>
                                 </thead>
@@ -47,10 +48,20 @@
                                     @foreach ($penilaian as $data)
                                     <tr>
                                         <td class="text-muted"> {{ $loop->iteration }}</td>
-                                        <td>{{ $data->sasaran}}</td>
-                                        <td>{{ $data->indikator_kinerja}}</td>
-                                        <td class="text-end">
-                                            <a href="{{ url('/penilaian/'.$data->indikator_id.'/detail/index') }}" class="btn btn-primary btn-sm"><i class="ti ti-eye"></i></a>
+                                        <td>{{ $data->indikatorDetail->kegiatan_name }}</td>
+                                        <td>{{ $data->month }}</td>
+                                        <td>{{ $data->realisasi_kegiatan_score }}</td>
+                                        <td class="text-end btn-group">
+                                            <a href="{{ route('penilaian.show', $data->penilaian_id) }}" class="btn btn-primary btn-sm"><i class="ti ti-eye"></i></a>
+                                            <a href="{{ url('/penilaian/'.$data->penilaian_id.'/items/edit') }}" class="btn btn-warning btn-sm"><i class="ti ti-edit"></i></a>
+                                            <a href="#" class="btn btn-danger btn-sm"
+                                                onclick="event.preventDefault(); if(confirm('Apakah yakin hapus data ini?')) { document.getElementById('delete-data-{{ $data->penilaian_id }}').submit(); }">
+                                                <span class="pc-micon"><i class="ti ti-trash"></i></span>
+                                            </a>
+                                            <form id="delete-data-{{ $data->penilaian_id }}" action="{{ route('penilaian.destroy', $data->penilaian_id) }}" method="POST" style="display:none;">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach

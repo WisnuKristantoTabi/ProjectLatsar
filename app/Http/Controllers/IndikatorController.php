@@ -37,6 +37,7 @@ class IndikatorController extends Controller
             'indikatorkinerja'      => 'required',
             'target'                => 'required',
             'target_jenis'          => 'required',
+            'bidang'                => 'required',
             'paguanggaran'          => 'required',
             'koreksinormalisasi'    => 'required',
         ]);
@@ -47,6 +48,7 @@ class IndikatorController extends Controller
             'target'                    => $request->target,
             'target_jenis'              => $request->target_jenis,
             'pagu_anggaran'             => $request->paguanggaran,
+            'bidang_id'                 => $request->bidang,
             'koreksi_normalisasi'       => $request->koreksinormalisasi,
         ]);
         return redirect()->route('indikator.index')->with('success', 'Indikator berhasil ditambahkan!');
@@ -67,7 +69,8 @@ class IndikatorController extends Controller
      */
     public function edit(IndikatorModel $indikatorModel)
     {
-        //
+        $bidang = BidangModel::all();
+        return view('indikator.edit', compact(['indikatorModel', 'bidang']));
     }
 
     /**
@@ -75,7 +78,26 @@ class IndikatorController extends Controller
      */
     public function update(Request $request, IndikatorModel $indikatorModel)
     {
-        //
+        $request->validate([
+            'sasaran'               => 'required',
+            'indikatorkinerja'      => 'required',
+            'target'                => 'required',
+            'target_jenis'          => 'required',
+            'paguanggaran'          => 'required',
+            'bidang'                => 'required',
+            'koreksinormalisasi'    => 'required',
+        ]);
+
+        $indikatorModel->update([
+            'sasaran'                   => $request->sasaran,
+            'indikator_kinerja'         => $request->indikatorkinerja,
+            'target'                    => $request->target,
+            'target_jenis'              => $request->target_jenis,
+            'pagu_anggaran'             => $request->paguanggaran,
+            'bidang_id'                 => $request->bidang,
+            'koreksi_normalisasi'       => $request->koreksinormalisasi,
+        ]);
+        return redirect()->route('indikator.index')->with('success', 'Indikator berhasil diubah!');
     }
 
     /**
@@ -83,6 +105,9 @@ class IndikatorController extends Controller
      */
     public function destroy(IndikatorModel $indikatorModel)
     {
-        //
+        $indikatorModel->penilaian()->delete();
+        $indikatorModel->indikatorDetail()->delete();
+        $indikatorModel->delete();
+        return redirect()->route('indikator.index')->with('success', 'Data berhasil di hapus!');
     }
 }

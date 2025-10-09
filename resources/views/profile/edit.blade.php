@@ -8,7 +8,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">Edit User</h5>
+                            <h5 class="m-b-10">Edit Profile</h5>
                         </div>
                         <ul class="breadcrumb">
                             @php $segments = ''; @endphp
@@ -51,7 +51,7 @@
                         <div class="d-flex justify-content-between align-items-end mb-4">
                             <h3 class="mb-0"><b>Edit</b></h3>
                         </div>
-                        <form action="{{ route('user.update', $user->user_id) }}" method="POST">
+                        <form action="{{ route('profile.update', $user->user_id) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="form-group mb-3">
@@ -60,7 +60,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label class="form-label">Username</label>
-                                <input type="text" class="form-control" name="username" value="{{ $user->username }}" placeholder="User Name">
+                                <input type="text" class="form-control" value="{{ $user->username }}" disabled>
                             </div>
                             <div class="form-group mb-3">
                                 <label class="form-label">Password</label>
@@ -68,7 +68,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label class="form-label">Status</label>
-                                <select id="" name="role" class="form-select">
+                                <select id="" class="form-select" disabled>
                                     <option value="1" @selected($user->role == 1)>Admin</option>
                                     <option value="2" @selected($user->role == 2)>Operator</option>
                                     <option value="3" @selected($user->role == 3)>Pimpinan</option>
@@ -76,14 +76,14 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label class="form-label">Bidang</label>
-                                <select id="" name="bidang" class="form-select">
+                                <select id="" class="form-select" disabled>
                                     @foreach ($bidang as $data)
                                     <option value="{{ $data->bidang_id }}" @selected($data->bidang_id == $user->bidang_id) >{{ $data->nama_bidang }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="d-grid mt-3">
-                                <button type="submit" class="btn btn-warning">Ubah</button>
+                                <button type="submit" class="btn btn-primary">Ubah</button>
                             </div>
                         </form>
                     </div>

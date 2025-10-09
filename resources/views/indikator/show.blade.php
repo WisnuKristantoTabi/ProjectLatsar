@@ -73,7 +73,10 @@
                 <div class="col-md-12">
                     <div class="card tbl-card">
                         <div class="card-header">
-                            <h5 class="mb-3"><a class="btn btn-primary" href="{{ url('/indikator/'.$indikatorModel->indikator_id.'/detail/create') }}" role="button">Tambah</a></h5>
+                            <h5 class="mb-3"><a class="btn btn-primary" href="{{ url('/indikator/'.$indikatorModel->indikator_id.'/detail/create') }}" role="button">
+                                    <span class="pc-micon"><i class="ti ti-plus"></i></span>
+                                    Tambah
+                                </a></h5>
                             <h5>Daftar Kegiatan</h5>
                         </div>
                         <div class="card-body">
@@ -95,8 +98,17 @@
                                             <td>{{ $data->kegiatan_name }}</td>
                                             <td>{{ $data->usulan_kegiatan_name }}</td>
                                             <td>{{ $data->realisasi_kegiatan_name }}</td>
-                                            <td class="text-end">
-                                                <a href="{{ url('/indikator/'.$data->indikator_detail_id.'/detail')}}">Lihat Detail</a>
+                                            <td class="text-end btn-group">
+                                                <a href="{{ route('indikator.detail.show', $data->indikator_detail_id) }}" class="btn btn-primary btn-sm"><span class="pc-micon"><i class="ti ti-eye"></i></span></a>
+                                                <a href="{{ route('indikator.detail.edit', $data->indikator_detail_id) }}" class="btn btn-warning btn-sm"><span class="pc-micon"><i class="ti ti-edit"></i></span></a>
+                                                <a href="#" class="btn btn-danger btn-sm"
+                                                    onclick="event.preventDefault(); if(confirm('Apakah yakin hapus data ini?')) { document.getElementById('delete-data-{{ $data->indikator_detail_id }}').submit(); }">
+                                                    <span class="pc-micon"><i class="ti ti-trash"></i></span>
+                                                </a>
+                                                <form id="delete-data-{{ $data->indikator_detail_id }}" action="{{ route('indikator.detail.destroy', $data->indikator_detail_id) }}" method="POST" style="display:none;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
                                             </td>
                                         </tr>
                                         @endforeach

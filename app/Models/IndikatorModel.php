@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\PenilaianModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class IndikatorModel extends Model
 {
@@ -38,6 +41,16 @@ class IndikatorModel extends Model
         'target_jenis',
         'pagu_anggaran',
         'koreksi_normalisasi',
+        'bidang_id',
 
     ];
+
+    public function penilaian(): HasMany
+    {
+        return $this->hasMany(PenilaianModel::class, 'indikator_id');
+    }
+    public function indikatorDetail(): HasMany
+    {
+        return $this->hasMany(IndikatorDetailModel::class, 'indikator_id');
+    }
 }

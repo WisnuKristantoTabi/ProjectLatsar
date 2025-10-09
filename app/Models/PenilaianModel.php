@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\IndikatorDetailModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PenilaianModel extends Model
 {
@@ -40,4 +42,14 @@ class PenilaianModel extends Model
         'keterangan',
         'suppporting_data',
     ];
+
+    public function indikatorDetail(): BelongsTo
+    {
+        return $this->belongsTo(IndikatorDetailModel::class, 'indikator_detail_id');
+    }
+
+    public function indikator(): BelongsTo
+    {
+        return $this->belongsTo(IndikatorModel::class, 'indikator_id');
+    }
 }

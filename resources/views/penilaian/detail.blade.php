@@ -40,7 +40,7 @@
                                         <th>No</th>
                                         <th>Nama Kegiatan Total</th>
                                         <th>Nama Kegiatan Terlaksana</th>
-                                        <th>Jumlah Kegiatan Terlaksana</th>
+                                        <th>Capaian</th>
                                         <th>Triwulan</th>
                                         <th class="text-end">Aksi</th>
                                     </tr>
@@ -51,10 +51,17 @@
                                         <td class="text-muted"> {{ $loop->iteration }}</td>
                                         <td>{{ $data->usulan_kegiatan_name }}</td>
                                         <td>{{ $data->realisasi_kegiatan_name }}</td>
-                                        <td>{{ $data->penilaian_sum_realisasi_kegiatan_score }}</td>
+                                        @php
+                                        $capaian = ($data->penilaian_sum_realisasi_kegiatan_score / $data->usulan_kegiatan_score)* 100 ;
+                                        @endphp
+
+                                        <td>
+                                            <p class="{{ ($capaian >= $data->target_per) ? 'text-primary': 'text-warning' }}"> {{ $data->penilaian_sum_realisasi_kegiatan_score ?? 0 }} / {{ $data->usulan_kegiatan_score }} </P>
+                                        </td>
                                         <td>{{ $data->triwulan }}</td>
-                                        <td class="text-end">
-                                            <a href="{{ url('/penilaian/'. $data->indikator_detail_id .'/create') }}">Tambah</a>
+                                        <td class="text-end btn-group">
+                                            <a href="{{ url('/penilaian/'. $data->indikator_detail_id .'/create') }}" class="btn btn-primary btn-sm"><i class="ti ti-plus"></i></a>
+                                            <a href="{{ url('/penilaian/'. $data->indikator_detail_id .'/items') }}" class="btn btn-info btn-sm"><i class="ti ti-eye"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach

@@ -59,7 +59,7 @@ class IndikatorDetailController extends Controller
             'realisasi_anggaran'        => $request->realisasianggaran,
             'bidang_id'                 => $request->bidang,
         ]);
-        return redirect()->route('indikator.index')->with('success', 'Kegiatan berhasil ditambahkan!');
+        return redirect()->route('indikator.show', $request->id)->with('success', 'Kegiatan berhasil ditambahkan!');
     }
 
     /**
@@ -83,24 +83,57 @@ class IndikatorDetailController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(IndikatorDetailModel $indikatorDetailModel)
+    public function edit($id)
     {
-        //
+        $bidang = BidangModel::all();
+        $indikatorDetailModel =  IndikatorDetailModel::findOrFail($id);
+        $indikator = $indikatorDetailModel->load("indikator");
+        // $indikator = $indikatorDetailModel;
+        return view('indikatordetail.edit', compact('indikator', 'bidang'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, IndikatorDetailModel $indikatorDetailModel)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'kegiatanname'              => 'required',
+            'usulankegiatanname'        => 'required',
+            'usulankegiatanscore'       => 'required',
+            'usulankegiatanrealisasi'   => 'required',
+            'targetper'                 => 'required',
+            'targetperjenis'            => 'required',
+            'keterangan'                => 'required',
+            'triwulan'                  => 'required',
+            'realisasianggaran'         => 'required',
+            'bidang'                    => 'required',
+        ]);
+
+        $indikatorDetailModel = IndikatorDetailModel::findOrFail($request->iddetail);
+        $indikatorDetailModel->update([
+            'kegiatan_name'             => $request->kegiatanname,
+            'usulan_kegiatan_name'      => $request->usulankegiatanname,
+            'usulan_kegiatan_score'     => $request->usulankegiatanscore,
+            'realisasi_kegiatan_name'   => $request->usulankegiatanrealisasi,
+            'target_per'                => $request->targetper,
+            'target_per_jenis'          => $request->targetperjenis,
+            'keterangan'                => $request->keterangan,
+            'triwulan'                  => $request->triwulan,
+            'realisasi_anggaran'        => $request->realisasianggaran,
+            'bidang_id'                 => $request->bidang,
+        ]);
+        return redirect()->route('indikator.show', $request->id)->with('success', 'Kegiatan berhasil ditambahkan!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(IndikatorDetailModel $indikatorDetailModel)
+    public function destroy($id)
     {
-        //
+        $indikatorDetailModel =  IndikatorDetailModel::find($id);
+        $indikatorDetailModel->penilaian()->delete();
+        $indikatorDetailModel->delete();
+        return redirect()->route('indikator.show', $indikatorDetailModel->indikator_id)->with('success', 'Data berhasil di hapus!');
     }
 }
