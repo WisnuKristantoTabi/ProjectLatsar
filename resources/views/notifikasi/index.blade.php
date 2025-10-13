@@ -8,7 +8,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">Tabel Penilaian</h5>
+                            <h5 class="m-b-10">Pesan</h5>
                         </div>
                         <ul class="breadcrumb">
                             @php $segments = ''; @endphp
@@ -31,6 +31,10 @@
         <div class="row">
             <!-- [ sample-page ] start -->
             <div class="col-md-12">
+                <h5 class="mb-3"><a class="btn btn-primary" href="{{ route('notif.create') }}" role="button">
+                        <span class="pc-micon"><i class="ti ti-plus"></i></span>
+                        Tambah
+                    </a></h5>
                 <div class="card tbl-card">
                     <div class="card-body">
                         <div class="table-responsive">
@@ -38,35 +42,20 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama Kegiatan Total</th>
-                                        <th>Nama Kegiatan Terlaksana</th>
-                                        <th>Capaian</th>
-                                        <th>Capaian (%)</th>
-                                        <th>TW</th>
+                                        <th>Jenis</th>
+                                        <th>Pesan</th>
                                         <th class="text-end">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($penilaian as $data)
+                                    @foreach ($notif as $data)
                                     <tr>
                                         <td class="text-muted"> {{ $loop->iteration }}</td>
-                                        <td>{{ $data->usulan_kegiatan_name }}</td>
-                                        <td>{{ $data->realisasi_kegiatan_name }}</td>
-                                        @php
-                                        $capaian = ($data->penilaian_sum_realisasi_kegiatan_score / $data->usulan_kegiatan_score)* 100 ;
-                                        @endphp
-
-                                        <td>
-                                            <p class="{{ ($capaian >= $data->target_per) ? 'text-primary': 'text-warning' }}"> {{ $data->penilaian_sum_realisasi_kegiatan_score ?? 0 }} / {{ $data->usulan_kegiatan_score }} </P>
-                                        </td>
-                                        <td>
-                                            <p class="{{ ($capaian >= $data->target_per) ? 'text-primary': 'text-warning' }}">{{round($capaian,2)}} %</p>
-                                        </td>
-                                        <td>{{ $data->triwulan }}</td>
-                                        <td class=" text-end btn-group">
-                                            <a href="{{ url('/penilaian/'. $data->indikator_detail_id .'/create') }}" class="btn btn-primary btn-sm"><i class="ti ti-plus"></i></a>
-                                            <a href="{{ url('/penilaian/'. $data->indikator_detail_id .'/items') }}" class="btn btn-info btn-sm"><i class="ti ti-eye"></i></a>
-                                        </td>
+                                        <td>{{ $data->jenis }}</td>
+                                        <td>{{ \Illuminate\Support\Str::limit($data->pesan,30,'...') }}</td>
+                                        <td><a href="{{ route('notif.show',$data->notifikasi_id)}}" class="btn btn-primary btn-sm">
+                                                <span class="pc-micon"><i class="ti ti-eye"></i></span>
+                                            </a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>

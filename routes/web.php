@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\NotifikasiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,6 +17,17 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::resource('user', UserController::class);
     Route::resource('profile', ProfileController::class);
+    Route::resource('notif', NotifikasiController::class)->names([
+        'store' => 'notifikasi.store',
+        'create' => 'notif.create',
+        'show' => 'notif.show',
+        'edit' => 'notif.edit',
+        'update' => 'notif.update',
+        'destroy' => 'notif.destroy',
+    ]);
+
+    Route::post('/notif/{id}/baca', [NotifikasiController::class, 'baca'])->name('notif.baca');
+    Route::get('/notif/{id}/index', [NotifikasiController::class, 'index'])->name('notif.index');
 
     Route::resource('indikator', IndikatorController::class)->parameters(['indikator' => 'indikatorModel']);
     // Route::resource('indikatordetail', IndikatorController::class);

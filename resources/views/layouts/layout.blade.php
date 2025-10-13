@@ -40,6 +40,49 @@
             <!-- [Mobile Media Block end] -->
             <div class="ms-auto">
                 <ul class="list-unstyled">
+                    <li class="dropdown pc-h-item">
+                        <a
+                            class="pc-head-link dropdown-toggle arrow-none me-0"
+                            data-bs-toggle="dropdown"
+                            href="#"
+                            role="button"
+                            aria-haspopup="false"
+                            aria-expanded="false">
+                            <i class="ti ti-mail"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown">
+                            <div class="dropdown-header d-flex align-items-center justify-content-between">
+                                <h5 class="m-0">Message</h5>
+                                <a href="#!" class="pc-head-link bg-transparent"><i class="ti ti-x text-danger"></i></a>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-header px-0 text-wrap header-notification-scroll position-relative" style="max-height: calc(100vh - 215px)">
+                                <div class="list-group list-group-flush w-100">
+                                    @foreach($notifikasi_global as $notif)
+                                    <form action="{{ route('notif.baca', $notif->notifikasi_id) }}" method="POST">
+                                        <!-- <a href="#" class="list-group-item list-group-item-action" onclick="baca('tes') "> -->
+                                        @csrf
+                                        <button type="submit" class="list-group-item list-group-item-action">
+                                            <div class="d-flex">
+                                                <div class="flex-grow-1 ms-1">
+                                                    <span class="float-end text-muted"></span>
+                                                    <p class="text-body mb-1"> {{ $notif->jenis }}</p>
+                                                    <p>{{ \Illuminate\Support\Str::limit( $notif->pesan,30,'...') }}</p>
+                                                    <span class="text-muted">{{ $notif->created_at->diffForHumans() }}</span>
+                                                </div>
+                                            </div>
+                                            <!-- </a> -->
+                                        </button>
+                                    </form>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="text-center py-2">
+                                <a href="{{ route('notif.index',session('userid') ) }}" class="link-primary">View all</a>
+                            </div>
+                        </div>
+                    </li>
                     <li class="dropdown pc-h-item header-user-profile">
                         <a
                             class="pc-head-link dropdown-toggle arrow-none me-0"
@@ -52,7 +95,7 @@
                             <!-- <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar"> -->
                             <span>{{ session('username') }}</span>
                         </a>
-                        <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
+                        <div class=" dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
                             <div class="dropdown-header">
                                 <div class="d-flex mb-1">
                                     <div class="flex-grow-1 ms-3">
@@ -103,6 +146,7 @@
             </div> -->
         </div>
     </footer>
+
 
     @include('layouts.footer-js')
 
