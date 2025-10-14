@@ -48,7 +48,11 @@
                             role="button"
                             aria-haspopup="false"
                             aria-expanded="false">
-                            <i class="ti ti-mail"></i>
+                            <i class="ti ti-bell"></i>
+                            @if($notifikasi_global->count() > 0)
+                                <span class="badge bg-success pc-h-badge">{{ $notifikasi_global->count() }}</span>
+                             @endif
+                           </span>
                         </a>
                         <div class="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown">
                             <div class="dropdown-header d-flex align-items-center justify-content-between">

@@ -43,7 +43,7 @@ class NotifikasiController extends Controller
             'jenis'       => $request->jenis,
             'pesan'       => $request->pesan,
         ]);
-        return redirect()->route('notif.create')->with('success', 'Indikator berhasil ditambahkan!');
+        return redirect()->route('notif.index',$request->user)->with('success', 'Indikator berhasil ditambahkan!');
     }
 
     /**
@@ -53,6 +53,12 @@ class NotifikasiController extends Controller
     {
         $notif = NotifikasiModel::where('notifikasi_id', $id)
             ->firstOrFail();
+
+        if($notif->status == 1){
+            $notif->update([
+                'status' => 2
+            ]);
+        }
         return view("notifikasi.show", compact('notif'));
     }
 
@@ -75,9 +81,11 @@ class NotifikasiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(NotifikasiModel $notifikasiModel)
+    public function destroy($id)
     {
-        //
+        $notif = NotifikasiModel::findOrFail($id);
+        $notif->delete();
+        return redirect()->route('notif.index', $notif->notifikasi_id)->with('success', 'Data berhasil di hapus!');
     }
 
     public function baca($id)

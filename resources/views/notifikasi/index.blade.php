@@ -53,9 +53,19 @@
                                         <td class="text-muted"> {{ $loop->iteration }}</td>
                                         <td>{{ $data->jenis }}</td>
                                         <td>{{ \Illuminate\Support\Str::limit($data->pesan,30,'...') }}</td>
-                                        <td><a href="{{ route('notif.show',$data->notifikasi_id)}}" class="btn btn-primary btn-sm">
+                                        <td class="text-end btn-group">
+                                            <a href="{{ route('notif.show',$data->notifikasi_id)}}" class="btn btn-primary btn-sm">
                                                 <span class="pc-micon"><i class="ti ti-eye"></i></span>
-                                            </a></td>
+                                            </a>
+                                            <a href="#" class="btn btn-danger btn-sm"
+                                                     onclick="event.preventDefault(); if(confirm('Apakah yakin hapus data ini?')) { document.getElementById('delete-data-{{ $data->notifikasi_id }}').submit(); }">
+                                                <span class="pc-micon"><i class="ti ti-trash"></i></span>
+                                            </a>
+                                            <form id="delete-data-{{ $data->notifikasi_id }}" action="{{ route('notif.destroy', $data->notifikasi_id) }}" method="POST" style="display:none;">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
