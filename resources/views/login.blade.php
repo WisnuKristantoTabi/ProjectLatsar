@@ -62,7 +62,7 @@
                             </ul>
                         </div>
                         @endif
-                        {{ session('username') }}
+
                         <form action="{{ url('/postlogin') }}" method="POST">
                             @csrf
                             <div class="form-group mb-3">

@@ -31,10 +31,12 @@
         <div class="row">
             <!-- [ sample-page ] start -->
             <div class="col-md-12">
+                @if(session('role') == '1')
                 <h5 class="mb-3"><a class="btn btn-primary" href="{{ route('notif.create') }}" role="button">
                         <span class="pc-micon"><i class="ti ti-plus"></i></span>
                         Tambah
                     </a></h5>
+                @endif
                 <div class="card tbl-card">
                     <div class="card-body">
                         <div class="table-responsive">
@@ -58,7 +60,7 @@
                                                 <span class="pc-micon"><i class="ti ti-eye"></i></span>
                                             </a>
                                             <a href="#" class="btn btn-danger btn-sm"
-                                                     onclick="event.preventDefault(); if(confirm('Apakah yakin hapus data ini?')) { document.getElementById('delete-data-{{ $data->notifikasi_id }}').submit(); }">
+                                                onclick="event.preventDefault(); if(confirm('Apakah yakin hapus data ini?')) { document.getElementById('delete-data-{{ $data->notifikasi_id }}').submit(); }">
                                                 <span class="pc-micon"><i class="ti ti-trash"></i></span>
                                             </a>
                                             <form id="delete-data-{{ $data->notifikasi_id }}" action="{{ route('notif.destroy', $data->notifikasi_id) }}" method="POST" style="display:none;">

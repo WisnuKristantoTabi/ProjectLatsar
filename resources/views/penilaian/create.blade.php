@@ -58,8 +58,10 @@
                                 <label class="form-label">{{ $indikatordetail->realisasi_kegiatan_name }}</label>
                                 <input type="number" min=0 class="form-control" name="realisasikegiatanscore" placeholder="Masukkan Jumlah">
                             </div>
-                            <div class="form-group mb-3">
-                                <label class="form-label">Bulan</label>
+                            <div class="input-group mb-3">
+                                <!-- <div class=""> -->
+                                <span class="pc-micon pe-1"><i class="ti ti-calendar" style="font-size: 30px;"></i></span>
+                                <!-- <label class="form-label">Bulan</label> -->
                                 <select id="" name="month" class="form-select">
                                     @if($indikatordetail->triwulan == 1 )
                                     <option value="1">Januari</option>
@@ -79,12 +81,13 @@
                                     <option value="12">Desember</option>
                                     @endif
                                 </select>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label class="form-label">Tahun</label>
+                                <!-- </div> -->
+                                <!-- <div class=""> -->
+                                <!-- <label class="form-label">Tahun</label> -->
                                 <select id="" name="year" class="form-select">
                                     <option value="2025">2025</option>
                                 </select>
+                                <!-- </div> -->
                             </div>
                             <div class="form-group mb-3">
                                 <label class="form-label">Keterangan</label>

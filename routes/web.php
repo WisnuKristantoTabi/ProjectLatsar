@@ -5,12 +5,17 @@ use App\Http\Controllers\IndikatorController;
 use App\Http\Controllers\IndikatorDetailController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\NotifikasiController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\CheckRole;
 
 Route::get('/', function () {
+    // if (session('username'))) {
+    //     return redirect()->route('dashboard');
+    // }
     return redirect()->route('login');
 });
 
@@ -20,11 +25,15 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('notif', NotifikasiController::class)->names([
         'store' => 'notifikasi.store',
         'create' => 'notif.create',
+        'index' => 'notif.index',
         'show' => 'notif.show',
         'edit' => 'notif.edit',
         'update' => 'notif.update',
         'destroy' => 'notif.destroy',
     ]);
+    Route::resource('laporan', LaporanController::class);
+    Route::get('/download', [LaporanController::class, 'download'])->name('laporan.download');
+    Route::get('/downloadpdf', [LaporanController::class, 'downloadPDF'])->name('laporan.download.pdf');
 
     Route::post('/notif/{id}/baca', [NotifikasiController::class, 'baca'])->name('notif.baca');
     Route::get('/notif/{id}/index', [NotifikasiController::class, 'index'])->name('notif.index');
@@ -39,6 +48,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/indikator/{indikator}/detail/delete', [IndikatorDetailController::class, 'destroy'])->name('indikator.detail.destroy');
     // Route::resource('penilaian', PenilaianController::class);
 
+    // Route::middleware(CheckRole::class . ':editor')->group(function () {
     Route::get('/penilaian/{indikator}/create', [PenilaianController::class, 'create'])->name('penilaian.create');
     Route::post('/penilaian/store', [PenilaianController::class, 'store'])->name('penilaian.store');
     Route::get('/penilaian', [PenilaianController::class, 'index'])->name('penilaian.index');
@@ -48,7 +58,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/penilaian/{indikator}/items', [PenilaianController::class, 'data'])->name('penilaian.data');
     Route::get('/penilaian/{indikator}/items/show', [PenilaianController::class, 'show'])->name('penilaian.show');
     Route::delete('/penilaian/{indikator}/delete', [PenilaianController::class, 'destroy'])->name('penilaian.destroy');
-
+    // });
     Route::get('/home', [UserController::class, 'index']);
     Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 });

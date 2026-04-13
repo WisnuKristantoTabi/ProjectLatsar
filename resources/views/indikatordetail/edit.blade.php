@@ -82,7 +82,8 @@
                                 <label class="form-label">Jenis Target</label>
                                 <select id="" name="targetperjenis" class="form-select">
                                     <option value="persen(%)" @selected($indikator->target_jenis == "persen(%)")>Persen(%)</option>
-                                    <option value="dokumen" @selected($indikator->target_jenis == "dokumen")>Dokumen</option>
+                                    <option value="dokumen" @selected($indikator->target_jenis == "dokumen") disabled>Dokumen</option>
+                                    <option value="orang" @selected($indikator->target_jenis == "orang") disabled>Orang</option>
                                 </select>
                             </div>
                             <div class="form-group mb-3">

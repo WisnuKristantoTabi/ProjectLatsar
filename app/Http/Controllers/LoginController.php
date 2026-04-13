@@ -32,6 +32,7 @@ class LoginController extends Controller
 
             session([
                 'username' => $user->username,
+                'nama'  => $user->nama,
                 'role'     => $user->role,
                 'userid' => $user->user_id,
                 'bidang'   => $user->bidang_id,

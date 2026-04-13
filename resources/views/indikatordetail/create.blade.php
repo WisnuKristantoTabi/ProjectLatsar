@@ -81,7 +81,8 @@
                                 <label class="form-label">Jenis Target</label>
                                 <select id="" name="targetperjenis" class="form-select">
                                     <option value="persen(%)">Persen(%)</option>
-                                    <option value="dokumen">Dokumen</option>
+                                    <option value="dokumen" disabled>Dokumen</option>
+                                    <option value="orang" disabled>Orang</option>
                                 </select>
                             </div>
                             <div class="form-group mb-3">

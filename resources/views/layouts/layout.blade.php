@@ -50,9 +50,9 @@
                             aria-expanded="false">
                             <i class="ti ti-bell"></i>
                             @if($notifikasi_global->count() > 0)
-                                <span class="badge bg-success pc-h-badge">{{ $notifikasi_global->count() }}</span>
-                             @endif
-                           </span>
+                            <span class="badge bg-success pc-h-badge">{{ $notifikasi_global->count() }}</span>
+                            @endif
+                            </span>
                         </a>
                         <div class="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown">
                             <div class="dropdown-header d-flex align-items-center justify-content-between">
@@ -83,7 +83,7 @@
                             </div>
                             <div class="dropdown-divider"></div>
                             <div class="text-center py-2">
-                                <a href="{{ route('notif.index',session('userid') ) }}" class="link-primary">View all</a>
+                                <a href="{{ url('/notif/'.session('userid').'/index') }}" class="link-primary">View all</a>
                             </div>
                         </div>
                     </li>
@@ -97,13 +97,13 @@
                             data-bs-auto-close="outside"
                             aria-expanded="false">
                             <!-- <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar"> -->
-                            <span>{{ session('username') }}</span>
+                            <span>{{ session('nama') }}</span>
                         </a>
                         <div class=" dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
                             <div class="dropdown-header">
                                 <div class="d-flex mb-1">
                                     <div class="flex-grow-1 ms-3">
-                                        <h6 class="mb-1">{{ session('username') }}</h6>
+                                        <h6 class="mb-1">{{ session('nama') }}</h6>
                                         <span>
                                             -
                                         </span>
