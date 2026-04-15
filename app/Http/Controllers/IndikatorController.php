@@ -14,7 +14,7 @@ class IndikatorController extends Controller
      */
     public function index()
     {
-        $indikator = IndikatorModel::all();
+        $indikator = IndikatorModel::where('tahun', "2026")->get();;
         return view('indikator.index', compact('indikator'));
     }
 
@@ -40,6 +40,7 @@ class IndikatorController extends Controller
             'bidang'                => 'required',
             'paguanggaran'          => 'required',
             'koreksinormalisasi'    => 'required',
+            'tahun'                 => 'required',
         ]);
 
         IndikatorModel::create([
@@ -50,6 +51,7 @@ class IndikatorController extends Controller
             'pagu_anggaran'             => $request->paguanggaran,
             'bidang_id'                 => $request->bidang,
             'koreksi_normalisasi'       => $request->koreksinormalisasi,
+            'tahun'                     => $request->tahun,
         ]);
         return redirect()->route('indikator.index')->with('success', 'Indikator berhasil ditambahkan!');
     }
@@ -86,6 +88,7 @@ class IndikatorController extends Controller
             'paguanggaran'          => 'required',
             'bidang'                => 'required',
             'koreksinormalisasi'    => 'required',
+            'tahun'                 => 'required',
         ]);
 
         $indikatorModel->update([
@@ -96,6 +99,7 @@ class IndikatorController extends Controller
             'pagu_anggaran'             => $request->paguanggaran,
             'bidang_id'                 => $request->bidang,
             'koreksi_normalisasi'       => $request->koreksinormalisasi,
+            'tahun'                     => $request->tahun,
         ]);
         return redirect()->route('indikator.index')->with('success', 'Indikator berhasil diubah!');
     }

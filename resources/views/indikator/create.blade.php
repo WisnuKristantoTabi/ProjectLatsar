@@ -59,7 +59,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label class="form-label">Target</label>
-                                <input type="number" min=0 class="form-control" name="target" placeholder="Target Kinerja">
+                                <input type="text" min=0 class="form-control" name="target" placeholder="Target Kinerja">
                             </div>
                             <div class="form-group mb-3">
                                 <label class="form-label">Jenis Target</label>
@@ -67,6 +67,7 @@
                                     <option value="persen(%)">Persen(%)</option>
                                     <option value="dokumen" disabled>Dokumen</option>
                                     <option value="orang" disabled>Orang</option>
+                                    <option value="indeks">Indeks</option>
                                 </select>
                             </div>
                             <div class="form-group mb-3">
@@ -87,6 +88,13 @@
                                 <div class="form-text">
                                     Angka dalam bentuk persen (%)
                                 </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label">Tahun</label>
+                                <select id="" name="tahun" class="form-select">
+                                    <option value="2026">2026</option>
+                                    <option value="2025">2025</option>
+                                </select>
                             </div>
                             <div class="d-grid mt-3">
                                 <button type="submit" class="btn btn-primary">Daftar</button>

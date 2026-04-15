@@ -42,6 +42,7 @@ class IndikatorModel extends Model
         'pagu_anggaran',
         'koreksi_normalisasi',
         'bidang_id',
+        'tahun',
 
     ];
 

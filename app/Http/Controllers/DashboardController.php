@@ -34,26 +34,15 @@ class DashboardController extends Controller
             LEFT JOIN penilaian p
                 ON p.indikator_id = i.indikator_id
             AND p.indikator_detail_id = idt.indikator_detail_id
+            WHERE i.tahun ='2026'
             GROUP BY i.bidang_id, idt.indikator_detail_id, idt.usulan_kegiatan_score, idt.target_per
         ) AS sub
         JOIN bidang b ON sub.bidang_id = b.bidang_id
         GROUP BY b.bidang_id, b.nama_bidang
-        ORDER BY b.nama_bidang;
+        ORDER BY b.nama_bidang
+        ;
 
         ");
-
-        // $laporan = DB::select("
-        // SELECT 
-        //     nama_bidang,
-        //      SUM(realisasi_kegiatan_score ) AS realisasi_kegiatan_total,
-        //    SUM(usulan_kegiatan_score) AS usulan_kegiatan_total
-
-        // FROM penilaian
-        // JOIN indikator ON penilaian.indikator_id = indikator.indikator_id
-        // JOIN bidang ON indikator.bidang_id = bidang.bidang_id
-        // JOIN indikator_detail as d ON penilaian.indikator_detail_id = d.indikator_detail_id
-        // GROUP BY nama_bidang;
-        // ");
 
         $categories = []; // untuk xaxis
         $realisasiData = [];  // untuk series pertama
